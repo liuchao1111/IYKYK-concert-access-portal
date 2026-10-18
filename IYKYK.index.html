@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IYKYK Concierge | 韩国演唱会票务定制与专属代办平台</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f5f3ff',
+                            100: '#ede9fe',
+                            400: '#a78bfa',
+                            500: '#8b5cf6',
+                            600: '#7c3aed',
+                            700: '#6d28d9',
+                            900: '#4c1d95',
+                            neon: '#c084fc',
+                            pink: '#ec4899',
+                            cyan: '#06b6d4',
+                            gold: '#f59e0b'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .glass-panel {
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .glass-card {
+            background: rgba(30, 41, 59, 0.5);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .glass-card-hover:hover {
+            border-color: rgba(167, 139, 250, 0.4);
+            box-shadow: 0 0 25px -5px rgba(139, 92, 246, 0.25);
+            transform: translateY(-2px);
+        }
+        .text-gradient {
+            background: linear-gradient(135deg, #c084fc 0%, #ec4899 50%, #06b6d4 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .text-gradient-gold {
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #d97706 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .glow-effect {
+            box-shadow: 0 0 30px -5px rgba(139, 92, 246, 0.3);
+        }
+        /* Custom scrollbars */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #090d16;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1e293b;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #334155;
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-[#070a12] text-slate-100 font-sans antialiased min-h-screen selection:bg-brand-500 selection:text-white flex flex-col">
+
+    <!-- Top Announcement Bar -->
+    <div class="bg-gradient-to-r from-purple-950 via-slate-900 to-indigo-950 text-slate-300 text-xs py-2.5 px-4 border-b border-purple-500/20 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <div class="flex items-center gap-2 overflow-hidden whitespace-nowrap">
+                <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold uppercase bg-purple-500/20 text-purple-300 border border-purple-400/30 shrink-0">
+                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse mr-1.5"></span>
+                    本期配额限时开放
+                </span>
+                <span class="text-slate-300 truncate">首尔本地认证账号直连 · 严格遵循一人一单人工托管原则 · 拒绝黑产脚本</span>
+            </div>
+            <div class="hidden md:flex items-center gap-6 text-[11px] text-slate-400 shrink-0">
+                <span><i class="fa-solid fa-headset text-purple-400 mr-1"></i> 1v1 专属管家</span>
+                <span><i class="fa-solid fa-shield-halved text-emerald-400 mr-1"></i> 资金担保</span>
+                <a href="#custom-request" class="text-purple-300 hover:text-white transition font-medium">提交特殊场次需求 &rarr;</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation Header -->
+    <header class="glass-panel sticky top-[37px] z-40 border-b border-slate-800/80 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <!-- Brand Logo -->
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-600 via-pink-600 to-indigo-600 flex items-center justify-center text-white font-black text-xl shadow-lg shadow-purple-500/20 group-hover:scale-105 transition">
+                    Y
+                </div>
+                <div>
+                    <span class="text-xl font-black tracking-wider text-white flex items-center gap-1">
+                        IYKYK <span class="text-xs font-semibold px-1.5 py-0.5 rounded bg-purple-900/60 text-purple-300 border border-purple-500/30">CONCIERGE</span>
+                    </span>
+                    <span class="block text-[9px] text-slate-400 tracking-widest uppercase font-semibold">Overseas Concert Access Portal</span>
+                </div>
+            </a>
+
+            <!-- Navigation Links -->
+            <nav class="hidden lg:flex items-center gap-8 text-xs font-semibold tracking-wide text-slate-300">
+                <a href="#shows" class="hover:text-purple-400 transition flex items-center gap-1.5">
+                    <i class="fa-solid fa-fire text-pink-500 text-xs"></i> 热门预售
+                </a>
+                <a href="#services" class="hover:text-purple-400 transition">服务模式</a>
+                <a href="#tracking" class="hover:text-purple-400 transition flex items-center gap-1.5">
+                    <i class="fa-solid fa-compass text-cyan-400 text-xs"></i> 订单跟踪
+                </a>
+                <a href="#pillars" class="hover:text-purple-400 transition">核心优势</a>
+                <a href="#trust" class="hover:text-purple-400 transition">安全保障</a>
+            </nav>
+
+            <!-- Header Action Buttons -->
+            <div class="flex items-center gap-3">
+                <button onclick="scrollToTracking()" class="hidden sm:flex items-center gap-2 px-3.5 py-2 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-slate-200 text-xs font-medium border border-slate-700 transition">
+                    <i class="fa-solid fa-magnifying-glass text-slate-400"></i>
+                    进度查询
+                </button>
+                <button onclick="openBookingModal('特定场次专属定制', 1000)" class="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white px-4 py-2 rounded-xl text-xs font-bold transition shadow-lg shadow-purple-900/40 flex items-center gap-2 transform hover:-translate-y-0.5">
+                    <i class="fa-solid fa-bolt"></i>
+                    立即定制抢票
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Body -->
+    <main class="flex-grow">
+        
+        <!-- Hero Section -->
+        <section class="relative overflow-hidden pt-12 pb-20 lg:pt-20 lg:pb-28">
+            <!-- Neon Lighting Background -->
+            <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[380px] bg-purple-600/15 blur-[140px] rounded-full pointer-events-none"></div>
+            <div class="absolute top-1/3 right-10 w-[350px] h-[350px] bg-pink-600/10 blur-[120px] rounded-full pointer-events-none"></div>
+            <div class="absolute bottom-10 left-10 w-[300px] h-[300px] bg-cyan-600/10 blur-[100px] rounded-full pointer-events-none"></div>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="text-center max-w-3xl mx-auto space-y-6">
+                    
+                    <!-- VIP Badge -->
+                    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-900/90 border border-purple-500/30 text-xs font-medium text-purple-300 backdrop-blur-md shadow-lg">
+                        <i class="fa-solid fa-crown text-amber-400"></i>
+                        <span>韩国本土优先预售 · 海外粉丝专属托管通道</span>
+                    </div>
+
+                    <!-- Headline -->
+                    <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-tight">
+                        打破地域限制<br>
+                        <span class="text-gradient">直通韩国本土优先预售通道</span>
+                    </h1>
+
+                    <p class="text-slate-300 text-sm sm:text-base leading-relaxed max-w-2xl mx-auto">
+                        韩国本地实名认证账号托管 + 专属团队人工代办 + 抢到票后再付服务费。告别高价溢价黄牛，锁定你的专属黄金看台与 VIP 区域。
+                    </p>
+
+                    <!-- CTAs -->
+                    <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
+                        <a href="#shows" class="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white font-bold text-sm shadow-xl shadow-purple-600/30 transition transform hover:-translate-y-0.5 flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-ticket"></i> 查看近期预售演出
+                        </a>
+                        <button onclick="openBookingModal('自定义意向演出', 900)" class="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-slate-900/90 border border-slate-700 hover:bg-slate-800 text-slate-200 font-semibold text-sm transition flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-sliders text-purple-400"></i> 提交定制需求
+                        </button>
+                    </div>
+
+                    <!-- Key Trust Badges Grid -->
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-3 pt-8 max-w-4xl mx-auto text-left">
+                        <div class="p-3.5 rounded-xl glass-card border border-slate-800/80 flex items-center gap-3">
+                            <div class="w-9 h-9 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 text-sm shrink-0">
+                                <i class="fa-solid fa-hand-holding-dollar"></i>
+                            </div>
+                            <div>
+                                <div class="text-xs font-bold text-white">第三方担保交易</div>
+                                <div class="text-[10px] text-slate-400">平台资金全程托管</div>
+                            </div>
+                        </div>
+
+                        <div class="p-3.5 rounded-xl glass-card border border-slate-800/80 flex items-center gap-3">
+                            <div class="w-9 h-9 rounded-lg bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400 text-sm shrink-0">
+                                <i class="fa-solid fa-rotate-left"></i>
+                            </div>
+                            <div>
+                                <div class="text-xs font-bold text-white">未抢到零手续费</div>
+                                <div class="text-[10px] text-slate-400">失败全额退还押金</div>
+                            </div>
+                        </div>
+
+                        <div class="p-3.5 rounded-xl glass-card border border-slate-800/80 flex items-center gap-3">
+                            <div class="w-9 h-9 rounded-lg bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400 text-sm shrink-0">
+                                <i class="fa-solid fa-file-contract"></i>
+                            </div>
+                            <div>
+                                <div class="text-xs font-bold text-white">透明风险披露</div>
+                                <div class="text-[10px] text-slate-400">事前告知实名规则</div>
+                            </div>
+                        </div>
+
+                        <div class="p-3.5 rounded-xl glass-card border border-slate-800/80 flex items-center gap-3">
+                            <div class="w-9 h-9 rounded-lg bg-pink-500/10 border border-pink-500/20 flex items-center justify-center text-pink-400 text-sm shrink-0">
+                                <i class="fa-solid fa-map-location-dot"></i>
+                            </div>
+                            <div>
+                                <div class="text-xs font-bold text-white">1v1 现场指引</div>
+                                <div class="text-[10px] text-slate-400">海外通关与实名协助</div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Concert Schedule Section -->
+        <section id="shows" class="py-16 bg-slate-900/40 border-y border-slate-800/60 relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+                    <div>
+                        <div class="flex items-center gap-2 text-xs font-bold text-purple-400 tracking-wider uppercase mb-1">
+                            <span class="w-2 h-2 rounded-full bg-purple-500 inline-block"></span> Live Schedules
+                        </div>
+                        <h2 class="text-2xl sm:text-3xl font-bold text-white">热门演出预售日历 & 抢票申请</h2>
+                        <p class="text-slate-400 text-xs sm:text-sm mt-1">同步 MelOn Ticket / YES24 / Interpark 本土首轮预售通道</p>
+                    </div>
+
+                    <!-- Category Filters -->
+                    <div class="flex flex-wrap items-center gap-2 bg-slate-950/80 p-1.5 rounded-xl border border-slate-800">
+                        <button onclick="filterShows('all')" class="filter-btn active px-3.5 py-1.5 rounded-lg text-xs font-semibold transition bg-purple-600 text-white" data-filter="all">全部场次</button>
+                        <button onclick="filterShows('stadium')" class="filter-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold transition text-slate-400 hover:text-white" data-filter="stadium">体育场 Stadium</button>
+                        <button onclick="filterShows('arena')" class="filter-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold transition text-slate-400 hover:text-white" data-filter="arena">竞技场 Arena</button>
+                        <button onclick="filterShows('fanmeeting')" class="filter-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold transition text-slate-400 hover:text-white" data-filter="fanmeeting">见面会 Fan Meeting</button>
+                    </div>
+                </div>
+
+                <!-- Show Cards Grid -->
+                <div id="showsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    
+                    <!-- Card 1: RIIZE -->
+                    <div class="show-card glass-card glass-card-hover rounded-2xl overflow-hidden transition duration-300 group flex flex-col" data-category="arena">
+                        <div class="relative h-48 bg-slate-800 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1540039155733-5bb30b53aa14?auto=format&fit=crop&w=800&q=80" alt="RIIZE Concert" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                            <div class="absolute inset-0 bg-gradient-to-t from-[#070a12] via-[#070a12]/30 to-transparent"></div>
+                            <span class="absolute top-3 left-3 bg-purple-600/90 text-white text-[10px] font-bold px-2.5 py-1 rounded-full uppercase backdrop-blur-md shadow">Arena 竞技场</span>
+                            <span class="absolute top-3 right-3 bg-red-500/90 text-white text-[10px] font-bold px-2 py-0.5 rounded backdrop-blur-md shadow">仅剩 3 席位</span>
+                        </div>
+                        <div class="p-5 flex-1 flex flex-col justify-between space-y-4">
+                            <div>
+                                <h3 class="text-base font-bold text-white group-hover:text-purple-300 transition">RIIZE World Tour [RIIZING]</h3>
+                                <p class="text-xs text-slate-400 mt-1 flex items-center gap-1"><i class="fa-solid fa-location-dot text-pink-400"></i> 首尔 KSPO DOME</p>
+                                
+                                <div class="mt-3 p-3 rounded-xl bg-slate-950/80 border border-slate-800/80 text-xs space-y-1.5">
+                                    <div class="flex justify-between"><span class="text-slate-400">演出日期:</span> <span class="text-slate-200 font-medium">2026.11.28 - 11.30</span></div>
+                                    <div class="flex justify-between"><span class="text-slate-400">本土预售:</span> <span class="text-purple-300 font-bold">2026.11.05 20:00 KST</span></div>
+                                    <div class="flex justify-between"><span class="text-slate-400">票面参考:</span> <span class="text-slate-300">154,000 ₩ (约 ¥830)</span></div>
+                                </div>
+                            </div>
+
+                            <button onclick="openBookingModal('RIIZE World Tour [RIIZING]', 830)" class="w-full py-2.5 rounded-xl bg-purple-600/90 hover:bg-purple-600 text-white font-bold text-xs transition flex items-center justify-center gap-1.5 shadow-lg shadow-purple-900/30">
+                                <i class="fa-solid fa-ticket"></i> 预订本地抢票席位
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Card 2: AESPA -->
+                    <div class="show-card glass-card glass-card-hover rounded-2xl overflow-hidden transition duration-300 group flex flex-col" data-category="stadium">
+                        <div class="relative h-48 bg-slate-800 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=800&q=80" alt="AESPA Concert" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                            <div class="absolute inset-0 bg-gradient-to-t from-[#070a12] via-[#070a12]/30 to-transparent"></div>
+                            <span class="absolute top-3 left-3 bg-indigo-600/90 text-white text-[10px] font-bold px-2.5 py-1 rounded-full uppercase backdrop-blur-md shadow">Stadium 体育场</span>
+                            <span class="absolute top-3 right-3 bg-emerald-500/90 text-white text-[10px] font-bold px-2 py-0.5 rounded backdrop-blur-md shadow">剩余 5 席位</span>
+                        </div>
+                        <div class="p-5 flex-1 flex flex-col justify-between space-y-4">
+                            <div>
+                                <h3 class="text-base font-bold text-white group-hover:text-purple-300 transition">AESPA Live Tour [SYNK: PARALLEL]</h3>
+                                <p class="text-xs text-slate-400 mt-1 flex items-center gap-1"><i class="fa-solid fa-location-dot text-pink-400"></i> 蚕室综合运动场主竞技场</p>
+                                
+                                <div class="mt-3 p-3 rounded-xl bg-slate-950/80 border border-slate-800/80 text-xs space-y-1.5">
+                                    <div class="flex justify-between"><span class="text-slate-400">演出日期:</span> <span class="text-slate-200 font-medium">2026.12.05 - 12.07</span></div>
+                                    <div class="flex justify-between"><span class="text-slate-400">本土预售:</span> <span class="text-purple-300 font-bold">2026.11.12 20:00 KST</span></div>
+                                    <div class="flex justify-between"><span class="text-slate-400">票面参考:</span> <span class="text-slate-300">165,000 ₩ (约 ¥890)</span></div>
+                                </div>
+                            </div>
+
+                            <button onclick="openBookingModal('AESPA Live Tour [SYNK: PARALLEL]', 890)" class="w-full py-2.5 rounded-xl bg-purple-600/90 hover:bg-purple-600 text-white font-bold text-xs transition flex items-center justify-center gap-1.5 shadow-lg shadow-purple-900/30">
+                                <i class="fa-solid fa-ticket"></i> 预订本地抢票席位
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Card 3: SEVENTEEN -->
+                    <div class="show-card glass-card glass-card-hover rounded-2xl overflow-hidden transition duration-300 group flex flex-col" data-category="stadium">
+                        <div class="relative h-48 bg-slate-800 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=800&q=80" alt="SEVENTEEN Concert" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                            <div class="absolute inset-0 bg-gradient-to-t from-[#070a12] via-[#070a12]/30 to-transparent"></div>
+                            <span class="absolute top-3 left-3 bg-indigo-600/90 text-white text-[10px] font-bold px-2.5 py-1 rounded-full uppercase backdrop-blur-md shadow">Stadium 体育场</span>
+                            <span class="absolute top-3 right-3 bg-amber-500/90 text-white text-[10px] font-bold px-2 py-0.5 rounded backdrop-blur-md shadow">仅剩 2 席位</span>
+                        </div>
+                        <div class="p-5 flex-1 flex flex-col justify-between space-y-4">
+                            <div>
+                                <h3 class="text-base font-bold text-white group-hover:text-purple-300 transition">SEVENTEEN [RIGHT HERE] World Tour</h3>
+                                <p class="text-xs text-slate-400 mt-1 flex items-center gap-1"><i class="fa-solid fa-location-dot text-pink-400"></i> 仁川亚运主体育场</p>
+                                
+                                <div class="mt-3 p-3 rounded-xl bg-slate-950/80 border border-slate-800/80 text-xs space-y-1.5">
+                                    <div class="flex justify-between"><span class="text-slate-400">演出日期:</span> <span class="text-slate-200 font-medium">2026.12.12 - 12.14</span></div>
+                                    <div class="flex justify-between"><span class="text-slate-400">本土预售:</span> <span class="text-purple-300 font-bold">2026.11.18 20:00 KST</span></div>
+                                    <div class="flex justify-between"><span class="text-slate-400">票面参考:</span> <span class="text-slate-300">198,000 ₩ (约 ¥1,060)</span></div>
+                                </div>
+                            </div>
+
+                            <button onclick="openBookingModal('SEVENTEEN [RIGHT HERE] World Tour', 1060)" class="w-full py-2.5 rounded-xl bg-purple-600/90 hover:bg-purple-600 text-white font-bold text-xs transition flex items-center justify-center gap-1.5 shadow-lg shadow-purple-900/30">
+                                <i class="fa-solid fa-ticket"></i> 预订本地抢票席位
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Card 4: NCT DREAM -->
+                    <div class="show-card glass-card glass-card-hover rounded-2xl overflow-hidden transition duration-300 group flex flex-col" data-category="fanmeeting">
+                        <div class="relative h-48 bg-slate-800 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1501386761578-eac5c94b800a?auto=format&fit=crop&w=800&q=80" alt="NCT DREAM Fan Meeting" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                            <div class="absolute inset-0 bg-gradient-to-t from-[#070a12] via-[#070a12]/30 to-transparent"></div>
+                            <span class="absolute top-3 left-3 bg-pink-600/90 text-white text-[10px] font-bold px-2.5 py-1 rounded-full uppercase backdrop-blur-md shadow">Fan Meeting</span>
+                            <span class="absolute top-3 right-3 bg-emerald-500/90 text-white text-[10px] font-bold px-2 py-0.5 rounded backdrop-blur-md shadow">剩余 4 席位</span>
+                        </div>
+                        <div class="p-5 flex-1 flex flex-col justify-between space-y-4">
+                            <div>
+                                <h3 class="text-base font-bold text-white group-hover:text-purple-300 transition">NCT DREAM Special Fanmeeting</h3>
+                                <p class="text-xs text-slate-400 mt-1 flex items-center gap-1"><i class="fa-solid fa-location-dot text-pink-400"></i> YES24 Live Hall</p>
+                                
+                                <div class="mt-3 p-3 rounded-xl bg-slate-950/80 border border-slate-800/80 text-xs space-y-1.5">
+                                    <div class="flex justify-between"><span class="text-slate-400">演出日期:</span> <span class="text-slate-200 font-medium">2026.12.20</span></div>
+                                    <div class="flex justify-between"><span class="text-slate-400">本土预售:</span> <span class="text-purple-300 font-bold">2026.11.25 20:00 KST</span></div>
+                                    <div class="flex justify-between"><span class="text-slate-400">票面参考:</span> <span class="text-slate-300">110,000 ₩ (约 ¥590)</span></div>
+                                </div>
+                            </div>
+
+                            <button onclick="openBookingModal('NCT DREAM Special Fanmeeting', 590)" class="w-full py-2.5 rounded-xl bg-purple-600/90 hover:bg-purple-600 text-white font-bold text-xs transition flex items-center justify-center gap-1.5 shadow-lg shadow-purple-900/30">
+                                <i class="fa-solid fa-ticket"></i> 预订本地抢票席位
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Service Models & Pricing Calculator Section -->
+        <section id="services" class="py-16 relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="text-center max-w-2xl mx-auto mb-12">
+                    <span class="text-xs font-bold text-purple-400 tracking-wider uppercase bg-purple-950/80 px-3 py-1 rounded-full border border-purple-800/50">Transparent Models</span>
+                    <h2 class="text-3xl font-bold text-white mt-2">服务模式与透明计算器</h2>
+                    <p class="text-slate-400 text-xs sm:text-sm mt-2">无隐藏费用，拒绝黄牛暴利。实报实销门票原价，仅收取透明服务代办费。</p>
+                </div>
+
+                <!-- 3 Service Packages Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+                    
+                    <!-- Plan A -->
+                    <div class="glass-card rounded-2xl p-6 border border-purple-500/30 relative flex flex-col justify-between glow-effect">
+                        <div class="absolute top-0 right-0 bg-gradient-to-l from-purple-600 to-pink-600 text-white text-[10px] font-bold px-3 py-1 rounded-bl-xl shadow">
+                            推荐首选
+                        </div>
+                        <div>
+                            <div class="text-xs font-bold text-purple-400 uppercase tracking-wider mb-1">Plan A</div>
+                            <h3 class="text-xl font-extrabold text-white">【抢到后付】成功后付服务费</h3>
+                            <p class="text-xs text-slate-400 mt-2 leading-relaxed">
+                                仅收取基础意向定金锁定班次。抢票成功后再支付剩余服务费，未抢到全额退还所有预付资金。
+                            </p>
+                            <div class="mt-4 pt-4 border-t border-slate-800 space-y-2 text-xs text-slate-300">
+                                <div class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> 服务费溢价仅 30% - 50%</div>
+                                <div class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> 未抢到零风险，100% 全额退款</div>
+                                <div class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> 韩国本地认证实名账号优先排队</div>
+                            </div>
+                        </div>
+                        <button onclick="openBookingModal('【抢到后付】成功后付模式', 850)" class="mt-6 w-full py-2.5 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-bold text-xs transition">
+                            选择 Plan A
+                        </button>
+                    </div>
+
+                    <!-- Plan B -->
+                    <div class="glass-card rounded-2xl p-6 border border-slate-800 flex flex-col justify-between">
+                        <div>
+                            <div class="text-xs font-bold text-pink-400 uppercase tracking-wider mb-1">Plan B</div>
+                            <h3 class="text-xl font-extrabold text-white">【优先保单】全托管与流程指导</h3>
+                            <p class="text-xs text-slate-400 mt-2 leading-relaxed">
+                                锁定专属韩国合伙人班次。如因官方极度紧缺未出票，扣除 100-200 元流程与账号排队指导费，其余退回。
+                            </p>
+                            <div class="mt-4 pt-4 border-t border-slate-800 space-y-2 text-xs text-slate-300">
+                                <div class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> 1v1 专属客服全程盯盘</div>
+                                <div class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> 包含演唱会现场通关与实名协助</div>
+                                <div class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> 支持优先抢指定看台前排/VIP</div>
+                            </div>
+                        </div>
+                        <button onclick="openBookingModal('【优先保单】全托管模式', 850)" class="mt-6 w-full py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-xs transition">
+                            选择 Plan B
+                        </button>
+                    </div>
+
+                    <!-- Plan C -->
+                    <div class="glass-card rounded-2xl p-6 border border-slate-800 flex flex-col justify-between">
+                        <div>
+                            <div class="text-xs font-bold text-cyan-400 uppercase tracking-wider mb-1">Plan C</div>
+                            <h3 class="text-xl font-extrabold text-white">【账号验证】自主代抢与环境配置</h3>
+                            <p class="text-xs text-slate-400 mt-2 leading-relaxed">
+                                适合有一定抢票经验的粉丝，提供已完成韩国本地实名认证的安全账号使用权与独家网络节点指导。
+                            </p>
+                            <div class="mt-4 pt-4 border-t border-slate-800 space-y-2 text-xs text-slate-300">
+                                <div class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> 独立实名认证账号环境</div>
+                                <div class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> 绕过海外 IP 防刷新限制</div>
+                                <div class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> 包含付款清算辅助与指导</div>
+                            </div>
+                        </div>
+                        <button onclick="openBookingModal('【账号验证】自主代抢', 600)" class="mt-6 w-full py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-xs transition">
+                            选择 Plan C
+                        </button>
+                    </div>
+
+                </div>
+
+                <!-- Interactive Pricing Calculator -->
+                <div class="glass-card p-6 sm:p-8 rounded-2xl border border-slate-800 max-w-3xl mx-auto">
+                    <h3 class="text-lg font-bold text-white mb-6 flex items-center gap-2">
+                        <i class="fa-solid fa-calculator text-purple-400"></i> 实时预估估算器 (Calculator)
+                    </h3>
+
+                    <div class="space-y-6">
+                        <div>
+                            <div class="flex justify-between text-xs font-semibold mb-2">
+                                <span class="text-slate-300">票面官方价格估算 (RMB):</span>
+                                <span id="calcTicketVal" class="text-purple-400 font-bold text-sm">¥ 850</span>
+                            </div>
+                            <input type="range" id="calcRange" min="400" max="1800" step="50" value="850" oninput="updateCalculatorUI()" class="w-full h-2 bg-slate-900 rounded-lg appearance-none cursor-pointer accent-purple-500">
+                            <div class="flex justify-between text-[10px] text-slate-500 mt-1">
+                                <span>¥400 (普通/见面会)</span>
+                                <span>¥850 (看台主区域)</span>
+                                <span>¥1,800 (内场 VIP)</span>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-4 p-4 rounded-xl bg-slate-950/80 border border-slate-800 text-xs">
+                            <div>
+                                <span class="text-slate-400 block">预估服务代办费 (+30%):</span>
+                                <span id="calcFeeVal" class="text-lg font-bold text-purple-300">¥ 255</span>
+                            </div>
+                            <div>
+                                <span class="text-slate-400 block">抢到后付费支付总额:</span>
+                                <span id="calcTotalVal" class="text-xl font-extrabold text-pink-400">¥ 1,105</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Order Tracker / Real-time Progress Simulator Section -->
+        <section id="tracking" class="py-16 bg-slate-900/40 border-y border-slate-800/80 relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="text-center max-w-2xl mx-auto mb-10">
+                    <span class="text-xs font-bold text-cyan-400 tracking-wider uppercase bg-cyan-950/80 px-3 py-1 rounded-full border border-cyan-800/50">Live Concierge Tracker</span>
+                    <h2 class="text-3xl font-bold text-white mt-2">订单实时状态与进度跟踪</h2>
+                    <p class="text-slate-400 text-xs sm:text-sm mt-2">输入或选择预订单号，实时掌控专属本地管家抢票与通关进程</p>
+                </div>
+
+                <div class="max-w-3xl mx-auto glass-card p-6 sm:p-8 rounded-2xl border border-slate-800">
+                    
+                    <!-- Search Input Box -->
+                    <div class="flex flex-col sm:flex-row gap-3 mb-8">
+                        <input type="text" id="orderIdInput" value="IYKYK-202611-8842" placeholder="请输入订单号 (如: IYKYK-202611-8842)" class="flex-1 bg-slate-950 border border-slate-700 rounded-xl px-4 py-3 text-xs text-white focus:outline-none focus:border-purple-500 font-mono">
+                        <button onclick="queryOrderProgress()" class="bg-purple-600 hover:bg-purple-500 text-white font-bold px-6 py-3 rounded-xl text-xs transition shrink-0 flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-magnifying-glass"></i> 查询进度
+                        </button>
+                    </div>
+
+                    <!-- Order Progress Stepper UI -->
+                    <div class="space-y-6 relative border-l-2 border-purple-500/30 ml-4 pl-6 py-2">
+                        
+                        <!-- Step 1 -->
+                        <div class="relative">
+                            <span class="absolute -left-[31px] top-0.5 w-4 h-4 rounded-full bg-purple-500 border-4 border-slate-900"></span>
+                            <div class="flex justify-between items-start">
+                                <h4 class="text-sm font-bold text-white">1. [已提交] 需求确认与锁单</h4>
+                                <span class="text-[10px] text-slate-500 font-mono">2026-10-22 14:30</span>
+                            </div>
+                            <p class="text-xs text-slate-400 mt-1">定制需求及预留门票区域已审核，已匹配资金担保账户。</p>
+                        </div>
+
+                        <!-- Step 2 -->
+                        <div class="relative">
+                            <span class="absolute -left-[31px] top-0.5 w-4 h-4 rounded-full bg-purple-500 border-4 border-slate-900"></span>
+                            <div class="flex justify-between items-start">
+                                <h4 class="text-sm font-bold text-white">2. [已锁单] 韩国本地实名账号匹配</h4>
+                                <span class="text-[10px] text-slate-500 font-mono">2026-10-22 15:10</span>
+                            </div>
+                            <p class="text-xs text-slate-400 mt-1">已指定首尔合伙人账号 (KR ID: **xilin_kr)，准备登录 MelOn 预售环境。</p>
+                        </div>
+
+                        <!-- Step 3 -->
+                        <div class="relative">
+                            <span class="absolute -left-[31px] top-0.5 w-4 h-4 rounded-full bg-emerald-400 border-4 border-slate-900 animate-pulse"></span>
+                            <div class="flex justify-between items-start">
+                                <h4 class="text-sm font-bold text-emerald-400">3. [预备中] 本土优先预售倒计时</h4>
+                                <span class="text-[10px] text-emerald-400 font-mono">进行中 (In Progress)</span>
+                            </div>
+                            <p class="text-xs text-slate-300 mt-1">本地节点 IP 已配置，锁定开售前 10 分钟本地服务器高速队列通道。</p>
+                        </div>
+
+                        <!-- Step 4 -->
+                        <div class="relative opacity-50">
+                            <span class="absolute -left-[31px] top-0.5 w-4 h-4 rounded-full bg-slate-700 border-4 border-slate-900"></span>
+                            <div class="flex justify-between items-start">
+                                <h4 class="text-sm font-bold text-slate-400">4. [结果确认] 出票状态通知与尾款结算</h4>
+                                <span class="text-[10px] text-slate-600 font-mono">待触发</span>
+                            </div>
+                            <p class="text-xs text-slate-500 mt-1">抢票成功后将下发截图证据，通知付清剩余服务费。</p>
+                        </div>
+
+                        <!-- Step 5 -->
+                        <div class="relative opacity-50">
+                            <span class="absolute -left-[31px] top-0.5 w-4 h-4 rounded-full bg-slate-700 border-4 border-slate-900"></span>
+                            <div class="flex justify-between items-start">
+                                <h4 class="text-sm font-bold text-slate-400">5. [入场指引] 专属 1v1 海外演唱会通关指南</h4>
+                                <span class="text-[10px] text-slate-600 font-mono">待触发</span>
+                            </div>
+                            <p class="text-xs text-slate-500 mt-1">下发包含现场领票点位、身份证核验及陪同指引手册。</p>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Core Pillars & Comparison Section -->
+        <section id="pillars" class="py-16 relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="text-center max-w-2xl mx-auto mb-12">
+                    <span class="text-xs font-bold text-pink-400 tracking-wider uppercase bg-pink-950/80 px-3 py-1 rounded-full border border-pink-800/50">Why Choose Us</span>
+                    <h2 class="text-3xl font-bold text-white mt-2">服务特色与渠道对比</h2>
+                    <p class="text-slate-400 text-xs sm:text-sm mt-2">为什么选择 IYKYK 专属代办而非风险极高的黄牛或受限的海外通道</p>
+                </div>
+
+                <!-- Comparison Table -->
+                <div class="glass-card rounded-2xl overflow-hidden border border-slate-800 overflow-x-auto">
+                    <table class="w-full text-left text-xs min-w-[600px]">
+                        <thead class="bg-slate-950 text-slate-300 font-semibold border-b border-slate-800">
+                            <tr>
+                                <th class="p-4">对比维度</th>
+                                <th class="p-4 text-purple-400 bg-purple-950/30">IYKYK 韩国专属代办</th>
+                                <th class="p-4 text-slate-400">传统黄牛 / 二手转让</th>
+                                <th class="p-4 text-slate-400">海外公开官方通道</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-800/80 text-slate-300">
+                            <tr>
+                                <td class="p-4 font-semibold text-slate-200">预售资格</td>
+                                <td class="p-4 bg-purple-950/10 font-bold text-emerald-400"><i class="fa-solid fa-circle-check"></i> 韩国本土优先首轮预售</td>
+                                <td class="p-4 text-slate-400">二手加价转卖</td>
+                                <td class="p-4 text-slate-400">受限海外通道 (无首轮预售)</td>
+                            </tr>
+                            <tr>
+                                <td class="p-4 font-semibold text-slate-200">资金安全</td>
+                                <td class="p-4 bg-purple-950/10 font-bold text-emerald-400"><i class="fa-solid fa-shield"></i> 抢到才付服务费 / 第三方担保</td>
+                                <td class="p-4 text-red-400"><i class="fa-solid fa-circle-xmark"></i> 必须先付 100% 全款，跑路风险高</td>
+                                <td class="p-4 text-emerald-400"><i class="fa-solid fa-circle-check"></i> 官方原价结算</td>
+                            </tr>
+                            <tr>
+                                <td class="p-4 font-semibold text-slate-200">溢价幅度</td>
+                                <td class="p-4 bg-purple-950/10 font-bold text-purple-300">30% - 50% 透明代办费</td>
+                                <td class="p-4 text-red-400">100% - 200%+ 随意炒卖</td>
+                                <td class="p-4 text-slate-300">0% (无溢价)</td>
+                            </tr>
+                            <tr>
+                                <td class="p-4 font-semibold text-slate-200">排队体验</td>
+                                <td class="p-4 bg-purple-950/10 font-bold text-emerald-400"><i class="fa-solid fa-bolt"></i> 本地 IP + 账号免海外卡顿</td>
+                                <td class="p-4 text-slate-400">不适用</td>
+                                <td class="p-4 text-red-400"><i class="fa-solid fa-triangle-exclamation"></i> 服务器崩溃卡死/几万人排队</td>
+                            </tr>
+                            <tr>
+                                <td class="p-4 font-semibold text-slate-200">现场通关指引</td>
+                                <td class="p-4 bg-purple-950/10 font-bold text-emerald-400"><i class="fa-solid fa-user-gear"></i> 1v1 专属现场实名协助</td>
+                                <td class="p-4 text-slate-500">无任何保障，极易查重封禁</td>
+                                <td class="p-4 text-slate-400">须完全自主核对护照入场</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Trust, Transparency & Risk Disclosure Section -->
+        <section id="trust" class="py-16 bg-slate-900/50 border-t border-slate-800">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="text-center mb-10">
+                    <h2 class="text-3xl font-bold text-white">安全保障与透明风险告知</h2>
+                    <p class="text-slate-400 text-xs sm:text-sm mt-2">坚持 100% 事前风险告知，杜绝虚假承诺，保障合法合规权益</p>
+                </div>
+
+                <div class="space-y-4 text-sm">
+                    
+                    <!-- Policy 1 -->
+                    <div class="glass-card rounded-xl border border-slate-800 overflow-hidden">
+                        <button onclick="toggleAccordion(this)" class="w-full p-5 text-left font-semibold text-slate-200 flex justify-between items-center hover:text-purple-300 transition">
+                            <span class="flex items-center gap-2"><i class="fa-solid fa-shield-halved text-purple-400"></i> 1. 为什么不保证 100% 抢票成功率？</span>
+                            <i class="fa-solid fa-chevron-down text-slate-500 transition-transform"></i>
+                        </button>
+                        <div class="acc-content hidden px-5 pb-5 text-xs text-slate-400 leading-relaxed border-t border-slate-800/60 pt-3">
+                            韩国热门演唱会预售属于极高度竞争。IYKYK 坚持使用<strong>首尔本地真实账号人工合规操作</strong>，拒绝使用非法黑客脚本刷票（脚本易引发官方封号或作废门票）。我们提供的是<strong>最优质的本土通道与优先权</strong>。若未能成功出票，承诺全额退还押金。
+                        </div>
+                    </div>
+
+                    <!-- Policy 2 -->
+                    <div class="glass-card rounded-xl border border-slate-800 overflow-hidden">
+                        <button onclick="toggleAccordion(this)" class="w-full p-5 text-left font-semibold text-slate-200 flex justify-between items-center hover:text-purple-300 transition">
+                            <span class="flex items-center gap-2"><i class="fa-solid fa-id-card text-pink-400"></i> 2. 韩国演唱会严格检查实名身份证，如何入场？</span>
+                            <i class="fa-solid fa-chevron-down text-slate-500 transition-transform"></i>
+                        </button>
+                        <div class="acc-content hidden px-5 pb-5 text-xs text-slate-400 leading-relaxed border-t border-slate-800/60 pt-3">
+                            依据不同票务平台（YES24 / MelOn / Interpark）的规则，我们在预售阶段会优先使用您的护照拼音信息锁定订单。对于部分必须由本地账号验证的场次，我们将安排首尔合伙人提供现场陪同或核验指引，确保安全通关入场。
+                        </div>
+                    </div>
+
+                    <!-- Policy 3 -->
+                    <div class="glass-card rounded-xl border border-slate-800 overflow-hidden">
+                        <button onclick="toggleAccordion(this)" class="w-full p-5 text-left font-semibold text-slate-200 flex justify-between items-center hover:text-purple-300 transition">
+                            <span class="flex items-center gap-2"><i class="fa-solid fa-arrow-rotate-left text-cyan-400"></i> 3. 退款流程与资金保障如何运作？</span>
+                            <i class="fa-solid fa-chevron-down text-slate-500 transition-transform"></i>
+                        </button>
+                        <div class="acc-content hidden px-5 pb-5 text-xs text-slate-400 leading-relaxed border-t border-slate-800/60 pt-3">
+                            所有预订押金均存放在第三方担保托管账户中。如开售时未成功锁定门票，系统将在预售结束后 24 小时内自动发起极速原路退款，不收取任何隐藏手续费。
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-[#05070d] border-t border-slate-800/80 py-10 text-xs text-slate-500">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-lg bg-purple-600/20 border border-purple-500/30 flex items-center justify-center text-purple-300 font-bold text-sm">Y</div>
+                <div>
+                    <span class="font-bold text-slate-300">IYKYK Concierge Service</span>
+                    <span class="block text-[10px] text-slate-500">Overseas Concert Ticket Access & Legal Proxy Portal</span>
+                </div>
+            </div>
+
+            <div class="flex flex-wrap items-center gap-6 text-[11px] text-slate-400">
+                <a href="#shows" class="hover:text-purple-300 transition">近期演出</a>
+                <a href="#services" class="hover:text-purple-300 transition">服务定价</a>
+                <a href="#trust" class="hover:text-purple-300 transition">退款条款与风险告知</a>
+            </div>
+
+            <div class="text-[10px] text-slate-600">
+                &copy; 2026 IYKYK Concierge. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive Booking / Custom Request Modal -->
+    <div id="bookingModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 flex items-center justify-center hidden p-4">
+        <div class="glass-panel w-full max-w-lg p-6 sm:p-8 rounded-2xl border border-slate-700 shadow-2xl relative space-y-5 animate-in fade-in zoom-in duration-200">
+            
+            <!-- Close Modal Button -->
+            <button onclick="closeBookingModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-lg transition">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div>
+                <span class="text-[10px] font-bold text-purple-400 uppercase bg-purple-900/40 px-2.5 py-1 rounded border border-purple-700/40">VIP Concierge Booking</span>
+                <h3 id="modalShowTitle" class="text-xl font-bold text-white mt-1">定制抢票意向</h3>
+                <p class="text-xs text-slate-400">成功出票前不收取尾款服务费，资金全额担保托管。</p>
+            </div>
+
+            <form id="bookingForm" onsubmit="handleFormSubmit(event)" class="space-y-4 text-xs">
+                
+                <div>
+                    <label class="block font-semibold text-slate-300 mb-1">选择目标坐席区域</label>
+                    <select id="modalSeatType" onchange="updateModalPricing()" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-3 text-slate-200 focus:outline-none focus:border-purple-500">
+                        <option value="0.30">【看台普通区域】预估票面 + 30% 代办费</option>
+                        <option value="0.50">【看台优质/前排区域】预估票面 + 50% 代办费</option>
+                        <option value="0.70">【内场 VIP / 摇滚区】预估票面 + 70% 代办费</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block font-semibold text-slate-300 mb-1">联系方式 (微信 / 手机号 / 小红书)</label>
+                    <input type="text" required placeholder="请留下您的联系方式以便管家对接" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-3 text-slate-200 focus:outline-none focus:border-purple-500">
+                </div>
+
+                <!-- Price Breakdown in Modal -->
+                <div class="p-3.5 bg-slate-950/90 rounded-xl border border-slate-800 space-y-1.5 text-slate-300">
+                    <div class="flex justify-between">
+                        <span class="text-slate-400">门票预估原价:</span>
+                        <span id="modalBasePriceVal">¥ 850</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-slate-400">服务代办费:</span>
+                        <span id="modalFeeVal" class="text-purple-400 font-bold">¥ 255</span>
+                    </div>
+                    <div class="flex justify-between text-sm font-bold text-white border-t border-slate-800 pt-2 mt-1">
+                        <span>抢到后付款总额:</span>
+                        <span id="modalTotalVal" class="text-pink-400">¥ 1,105</span>
+                    </div>
+                </div>
+
+                <!-- Agreement Checkbox -->
+                <div class="flex items-start gap-2 pt-1">
+                    <input type="checkbox" id="riskCheck" required class="mt-0.5 rounded bg-slate-950 border-slate-700 text-purple-600 focus:ring-0">
+                    <label for="riskCheck" class="text-[11px] text-slate-400 leading-tight">
+                        我已阅读并同意《IYKYK 韩国代办服务条款》：已知晓人工代抢无法保证 100% 出票，未成功将全额退还押金。
+                    </label>
+                </div>
+
+                <button type="submit" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white font-bold text-xs transition shadow-lg shadow-purple-600/30">
+                    提交定制需求 (极速对接)
+                </button>
+            </form>
+
+        </div>
+    </div>
+
+    <!-- Success Toast Notification -->
+    <div id="toast" class="fixed bottom-6 right-6 glass-panel border border-emerald-500/50 p-4 rounded-xl shadow-2xl flex items-center gap-3 transform translate-y-20 opacity-0 transition-all duration-300 z-50">
+        <div class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0">
+            <i class="fa-solid fa-circle-check text-base"></i>
+        </div>
+        <div>
+            <div class="text-xs font-bold text-white">需求提交成功！</div>
+            <div class="text-[11px] text-slate-400">专属管家将在 15 分钟内通过您的联系方式建立 1v1 服务对接。</div>
+        </div>
+    </div>
+
+    <!-- JavaScript Logic -->
+    <script>
+        let modalCurrentBasePrice = 850;
+
+        // Pricing Calculator UI handler
+        function updateCalculatorUI() {
+            const price = parseFloat(document.getElementById('calcRange').value);
+            document.getElementById('calcTicketVal').innerText = `¥ ${price}`;
+            
+            const fee = Math.round(price * 0.30);
+            const total = price + fee;
+
+            document.getElementById('calcFeeVal').innerText = `¥ ${fee}`;
+            document.getElementById('calcTotalVal').innerText = `¥ ${total.toLocaleString()}`;
+        }
+
+        // Show Filter
+        function filterShows(cat) {
+            const btns = document.querySelectorAll('.filter-btn');
+            btns.forEach(b => {
+                if(b.getAttribute('data-filter') === cat) {
+                    b.classList.add('bg-purple-600', 'text-white');
+                    b.classList.remove('text-slate-400');
+                } else {
+                    b.classList.remove('bg-purple-600', 'text-white');
+                    b.classList.add('text-slate-400');
+                }
+            });
+
+            const cards = document.querySelectorAll('.show-card');
+            cards.forEach(c => {
+                if(cat === 'all' || c.getAttribute('data-category') === cat) {
+                    c.style.display = 'flex';
+                } else {
+                    c.style.display = 'none';
+                }
+            });
+        }
+
+        // Modal Controls
+        function openBookingModal(title, basePrice) {
+            modalCurrentBasePrice = basePrice;
+            document.getElementById('modalShowTitle').innerText = title;
+            document.getElementById('modalBasePriceVal').innerText = `¥ ${basePrice}`;
+            updateModalPricing();
+            document.getElementById('bookingModal').classList.remove('hidden');
+        }
+
+        function closeBookingModal() {
+            document.getElementById('bookingModal').classList.add('hidden');
+        }
+
+        function updateModalPricing() {
+            const rate = parseFloat(document.getElementById('modalSeatType').value);
+            const fee = Math.round(modalCurrentBasePrice * rate);
+            const total = modalCurrentBasePrice + fee;
+
+            document.getElementById('modalFeeVal').innerText = `¥ ${fee}`;
+            document.getElementById('modalTotalVal').innerText = `¥ ${total.toLocaleString()}`;
+        }
+
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            closeBookingModal();
+
+            // Trigger Toast
+            const toast = document.getElementById('toast');
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 4000);
+        }
+
+        // Scroll helper
+        function scrollToTracking() {
+            document.getElementById('tracking').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Accordion Toggle
+        function toggleAccordion(btn) {
+            const content = btn.nextElementSibling;
+            const icon = btn.querySelector('i.fa-chevron-down');
+            if(content.classList.contains('hidden')) {
+                content.classList.remove('hidden');
+                if(icon) icon.style.transform = 'rotate(180deg)';
+            } else {
+                content.classList.add('hidden');
+                if(icon) icon.style.transform = 'rotate(0deg)';
+            }
+        }
+
+        // Order Tracker query simulation
+        function queryOrderProgress() {
+            const toast = document.getElementById('toast');
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3000);
+        }
+
+        // Initialize UI
+        updateCalculatorUI();
+    </script>
+</body>
+</html>
